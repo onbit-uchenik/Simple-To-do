@@ -1,0 +1,15 @@
+{
+  "name": "lib",
+  "version": "1.0.0",
+  "description": "local database just for testing",
+  "main": "localdb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "local",
+    "db"
+  ],
+  "author": "Onbit Syn",
+  "license": "ISC"
+}
