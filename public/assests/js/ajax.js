@@ -14,6 +14,7 @@ $('ul').on('click','span',function(event) {
     });
     event.stopPropagation();
 });
+//https://medium.com/@yaniv_g/dont-use-bodyparser-json-with-jquery-post-d034c44ac7ad
 
 $('input').keypress(function(event){
     if(event.which === 13) {
@@ -22,18 +23,13 @@ $('input').keypress(function(event){
             "id" : (id++),
             "task" : str
         };
-        console.log(data);
-        $.post("/task",
-            {
-            "id" : (id++),
-            "task" : str
-            },
+        
+        $.post("/task",data,
             function (res, textStatus, jqXHR) {
-                console.log(res);
+                $('ul').append(`<li> <span class="delete"> <i class="fa fa-trash" aria-hidden="true"></i> </span>${res.task}</li>`);
             },
             "json"
         );
-        $('ul').append(`<li> <span class="delete"> <i class="fa fa-trash" aria-hidden="true"></i> </span>${str}</li>`);
-        $(this).val('')
+        
     }
 });

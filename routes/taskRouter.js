@@ -6,6 +6,7 @@ const taskRouter = express.Router();
 const db = new localdb();
 
 taskRouter.use(bodyParser.json());
+taskRouter.use(bodyParser.urlencoded({extended:true}));
 
 taskRouter.route('/')
 .all( (req,res,next)=>{
@@ -18,7 +19,6 @@ taskRouter.route('/')
 })
 .post ( (req,res,next) => {
     db.insert(req.body);
-    console.log(req.body);
     res.end(JSON.stringify(req.body));
 })
 .put( (req,res,next) => {
