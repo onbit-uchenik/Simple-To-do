@@ -52,6 +52,7 @@ taskRouter.route('/:taskId')
 })
 .delete( (req,res,next) => {
     db.remove(req.params.taskId);
+    console.log(req.params.taskId);
     res.end(JSON.stringify(req.body));
 });
 

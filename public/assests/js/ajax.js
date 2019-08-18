@@ -8,9 +8,18 @@ $('ul').on('click','li',function(event) {
 //delete item functionality..
 
 $('ul').on('click','span',function(event) {
-    
     $(this).parent().fadeOut(200,function() {
-        $(this).remove();
+        let taskId = $(this).attr('id');
+        let ref = $(this);
+        $.ajax({
+            type: "delete",
+            url: `/task/${taskId}`,
+            dataType: "json",
+            success: function (res) {
+                ref.remove();        
+            }
+        });
+        
     });
     event.stopPropagation();
 });
@@ -19,6 +28,7 @@ $('ul').on('click','span',function(event) {
 $('input').keypress(function(event){
     if(event.which === 13) {
         let str =  $(this).val();
+        $(this).val('');
         let data = {
             "id" : (id++),
             "task" : str
@@ -26,7 +36,7 @@ $('input').keypress(function(event){
         
         $.post("/task",data,
             function (res, textStatus, jqXHR) {
-                $('ul').append(`<li> <span class="delete"> <i class="fa fa-trash" aria-hidden="true"></i> </span>${res.task}</li>`);
+                $('ul').append(`<li id=${res.id}> <span class="delete"> <i class="fa fa-trash" aria-hidden="true"></i> </span>${res.task}</li>`);
             },
             "json"
         );
